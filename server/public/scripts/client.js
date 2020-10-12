@@ -5,6 +5,7 @@ $(document).ready( makeReady );
 function makeReady()
 {
     $("#sumSubmitBtn").on( 'click', getSumSubmit );
+    $("#clearBtn").on( 'click', clearInputs );
 
     ($("#addBtn").on( 'click', assignAdd));
     ($("#subtractBtn").on( 'click', assignSub));
@@ -20,51 +21,61 @@ function assignAdd(){
     operator = '+';
     input1 = $("#input1").val(),
     input2 = $("#input2").val()
-    console.log( input1, input2, operator );
+    console.log( input1, operator, input2 );
 }
 
 function assignSub(){
     operator = '-';
     input1 = $("#input1").val(),
     input2 = $("#input2").val()
-    console.log( input1, input2, operator );
+    console.log( input1, operator, input2 );
 }
 
 function assignMult(){
     operator = '*';
     input1 = $("#input1").val(),
     input2 = $("#input2").val()
-    console.log( input1, input2, operator );
+    console.log( input1, operator, input2 );
 }
 
 function assignDiv(){
     operator = '/';
     input1 = $("#input1").val(),
     input2 = $("#input2").val()
-    console.log( input1, input2, operator );
+    cconsole.log( input1, operator, input2 );
+}
+
+function clearInputs(){
+    $("#input1").val( '' ),
+    $("#input2").val( '' ),
+    input1 = 0,
+    input2 = 0,
+    operator = null;
+    console.log( input1, operator, input2);
 }
 
 function getSumSubmit()
 { 
+    console.log( 'hello from getSumSubmit! ');
+    let submission = 
+    {
+        input1 : $("#input1").val(),
+        input2 : $("#input2").val(),
+        operator : operator
+    }
+
     $.ajax
-      ({
-          method: 'POST',
-          url: '/calculations',
-          data: 
-          {
-            input1 : $("#input1").val(),
-            input2 : $("#input2").val(),
-            operator : operator
-          }
-      }).then(function(response)
-      {
+        ({
+            method: 'POST',
+            url: '/calculations',
+            data: submission
+        }).then(function(response)
+        {
           console.log('response was', response);
-      })
-      //   }).catch(function(error){
-    //       //notifying the user of an error in post request
-    //       alert(error);
-}
-          
+        }).catch(function(error){
+            alert(error);
+    })
+}  
 
 // function determineOperator()
 // {
