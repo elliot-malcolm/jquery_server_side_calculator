@@ -18,33 +18,30 @@ input1 = 0;
 input2 = 0;
 operator = null;
 
+// The functions below indicate the operator for the equation, 
+// to be assigned as the "operator" value of the object.
+
 function assignAdd(){
     operator = '+';
-    // input1 = $("#input1").val(),
-    // input2 = $("#input2").val()
     console.log( input1, operator, input2 );
 }
 
 function assignSub(){
     operator = '-';
-    // input1 = $("#input1").val(),
-    // input2 = $("#input2").val()
     console.log( input1, operator, input2 );
 }
 
 function assignMult(){
     operator = '*';
-    // input1 = $("#input1").val(),
-    // input2 = $("#input2").val()
     console.log( input1, operator, input2 );
 }
 
 function assignDiv(){
     operator = '/';
-    // input1 = $("#input1").val(),
-    // input2 = $("#input2").val()
     console.log( input1, operator, input2 );
 }
+
+// This function clears all equation inputs
 
 function clearInputs(){
     $("#input1").val( '' ),
@@ -55,9 +52,10 @@ function clearInputs(){
     console.log( input1, operator, input2);
 }
 
+// Post route to server-side calculation logic
+
 function sumSubmit()
 { 
-    console.log( 'hello from SumSubmit! ');
     let submission = 
     {
         input1 : $("#input1").val(),
@@ -72,7 +70,6 @@ function sumSubmit()
             data: submission
         }).then(function(response)
         {
-        console.log('response was', response);
         let sumOut = response.submissionSum;
         getMathSubmissions();
         console.log(sumOut);
@@ -91,6 +88,9 @@ function sumSubmit()
         $("#input2").val( '' );
 }  
 
+// This function retrieves the historical output of the function
+// and appends it to the DOM 
+
 function getMathSubmissions() 
 {
     $.ajax
@@ -99,7 +99,6 @@ function getMathSubmissions()
             url: '/calculations'
         }).then(function (response) 
         {
-        console.log('sum is',response);
         appendHistory(response);
         }).catch(function(error)
         {
@@ -107,14 +106,15 @@ function getMathSubmissions()
         })
 };
 
-    
+// This function takes in the array from the server-side 
+// and appends it to the DOM
+
 function appendHistory( mathyObjArray )
 {
-    console.log( 'appending obj to dom' );
     $('#historyTable').empty();
     for (let i = 0; i < mathyObjArray.length; i++)
     {
-    $('#historyTable').append(`
+        $('#historyTable').append(`
         <tr> 
            <td> ${mathyObjArray[i].input1} </td>
            <td> ${mathyObjArray[i].operator} </td>

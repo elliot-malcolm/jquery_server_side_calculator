@@ -10,6 +10,9 @@ mathSubmissions = [];
 
 mathyObj = null;
 
+// This express.post function applies the logic for the calculation
+// and packages and pushes the object to an object array (mathSubmissions)
+
 app.post('/calculations', (req, res) => 
 {
     console.log('hello from post', req.body);
@@ -26,15 +29,16 @@ app.post('/calculations', (req, res) =>
 });
 
 app.get('/calculations', (req, res) => 
-    {
+{
     console.log('sending', mathyObj );
     res.send(mathSubmissions);
-    });
+});
 
+// This is the logic to execute The Math based on the type of 
+// operator passed through from the DOM 
 
 function findSum( submission )
 {
-    console.log( 'in findsum ');
     if ( submission.input1 == '' || submission.input1 == '' )
     {
         return false;
@@ -59,6 +63,7 @@ function findSum( submission )
 }
 
 
-app.listen(PORT, () => {
+app.listen(PORT, () => 
+{
     console.log ('Server is running on port', PORT);
-  });
+});
