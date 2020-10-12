@@ -1,0 +1,19 @@
+TODO:
+
+client/html
+[x] User Interface with two inputs and 
+[x] mathematical operators
+[x] =(sum) creates object and sends to server
+[x] via a POST
+[x] "C" button to clear inputs 
+
+server 
+[x] calcNum function 
+[x] + - / *
+[x] send OK to client 
+
+//
+[x] "GET" req for calculation 
+[] post historical record (array)
+[] load all calculations onLoad 
+[] update list on new calculation 

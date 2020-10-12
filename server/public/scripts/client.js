@@ -4,7 +4,7 @@ $(document).ready( makeReady );
 
 function makeReady()
 {
-    $("#sumSubmitBtn").on( 'click', getSumSubmit );
+    $("#sumSubmitBtn").on( 'click', sumSubmit );
     $("#clearBtn").on( 'click', clearInputs );
 
     ($("#addBtn").on( 'click', assignAdd));
@@ -42,7 +42,7 @@ function assignDiv(){
     operator = '/';
     input1 = $("#input1").val(),
     input2 = $("#input2").val()
-    cconsole.log( input1, operator, input2 );
+    console.log( input1, operator, input2 );
 }
 
 function clearInputs(){
@@ -54,13 +54,13 @@ function clearInputs(){
     console.log( input1, operator, input2);
 }
 
-function getSumSubmit()
+function sumSubmit()
 { 
-    console.log( 'hello from getSumSubmit! ');
+    console.log( 'hello from SumSubmit! ');
     let submission = 
     {
-        input1 : $("#input1").val(),
-        input2 : $("#input2").val(),
+        input1 : Number($("#input1").val()),
+        input2 : Number($("#input2").val()),
         operator : operator
     }
 
@@ -71,119 +71,46 @@ function getSumSubmit()
             data: submission
         }).then(function(response)
         {
-          console.log('response was', response);
-        }).catch(function(error){
+        console.log('response was', response);
+        $('#sumOut').append(response);
+        }).catch(function(error)
+        {
             alert(error);
-    })
+        })
 }  
 
-// function determineOperator()
+// function getSubmissionAnswer() 
 // {
-//     if ($("#addBtn").click())
+//     $.ajax
+//         ({
+//             type: 'GET',
+//             url: '/calculations',
+//         }).then(function (response) 
+//         {
+//         console.log('sum is',response);
+//         appendHistory(response);
+//         }).catch(function(error)
+//         {
+//                 alert(error);
+//         })
+// };
+
+    
+// function appendHistory( mathyObjArray )
+// {
+//     console.log( 'appending obj to dom' );
+//     $('#historyTable').empty();
+//     for (let i = 0; i < mathyObjArray.length; i++)
 //     {
-//         operator = '+';
-//         console.log( 'operator = +');
-//     } 
-//     if ($("#subtractBtn").click())
-//     {
-//         operator = '-';
-//         console.log( 'operator = -');
+//         $('#historyTable').append(`
+//         <tr>
+//             round${[i + 1]}: 
+//             ${mathyObjArray[i].input1} 
+//             ${mathyObjArray[i].operator} 
+//             ${mathyObjArray[i].input1}
+//         </tr>
+//         `);
 //     }
-//     if ($("#multBtn").click())
-//     {
-//         operator = '*';
-//         console.log( 'operator = -');
-//     }
-//     if ($("#divBtn").click())
-//     {
-//         operator = '/';
-//         console.log( 'operator = -');
-//     }
 
-// takes in button values and assigns operator
-// function determineOperator()
-// {
-//     $(".operator").empty();
-//     if ($(".operator").attr() == '+'
-//     ($("subtractBtn").on( 'click', determine );
+// };
 
-// }
-
-// function assignAddition();
-// {
-//     operator = '+';
-// }
-
-// function assignSubtraction();
-// {
-//     operator = '-'
-// }
-
-// function assignDivision();
-// {
-//     operator = '/'
-// }
-
-// function assignMultiplication();
-// {
-//     operator = '*'
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //       // append to the table in the DOM
-    //       $("#guessTable").append(`
-    //       <tr>
-    //         <td>${counter}</td>
-    //         <td>${peterGuess}</td>
-    //         <td>${elliotGuess}</td>
-    //         <td>${nickGuess}</td>
-    //         <td>${mattGuess}</td>
-    //     </tr>
-    //       `);
-    //       $('.guessInput').val('');
-          
-    //   }).catch(function(error){
-    //       //notifying the user of an error in post request
-    //       alert(error);
-
-    // <label for="input1">First number:</label>
-    // <input class="inputField" type="number" id="firstInput" placeholder="First number">
-    // <button id="addBtn"> + </button>
-    // <button id="subtractBtn"> - </button>
-    // <button id="multBtn"> * </button>
-    // <button id="divBtn"> / </button>
-    // <label for="male">Second number:</label>
-    // <input class="inputField" type="number" id="secondInput" placeholder="Second number">
-    // <!-- submit guess button  -->
-    // <button id="sumBtn"> = </button>
-    // <!-- clear inputs button  -->
-    // <button id="clearBtn"> C </button>
