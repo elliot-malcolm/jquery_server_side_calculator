@@ -1,14 +1,93 @@
 console.log( 'welcome to js ');
 
 $(document).ready( makeReady );
-$("#sumSubmitBtn").on( 'click', )
-$(".operator").on( 'click', determineOperator )
+
+function makeReady()
+{
+    $("#sumSubmitBtn").on( 'click', getSumSubmit );
+
+    ($("#addBtn").on( 'click', assignAdd));
+    ($("#subtractBtn").on( 'click', assignSub));
+    ($("#multBtn").on( 'click', assignMult));
+    ($("#divBtn").on( 'click', assignDiv));
+}
 
 input1 = 0;
 input2 = 0;
 operator = null;
 
-console.log( $(".operator").attr());
+function assignAdd(){
+    operator = '+';
+    input1 = $("#input1").val(),
+    input2 = $("#input2").val()
+    console.log( input1, input2, operator );
+}
+
+function assignSub(){
+    operator = '-';
+    input1 = $("#input1").val(),
+    input2 = $("#input2").val()
+    console.log( input1, input2, operator );
+}
+
+function assignMult(){
+    operator = '*';
+    input1 = $("#input1").val(),
+    input2 = $("#input2").val()
+    console.log( input1, input2, operator );
+}
+
+function assignDiv(){
+    operator = '/';
+    input1 = $("#input1").val(),
+    input2 = $("#input2").val()
+    console.log( input1, input2, operator );
+}
+
+function getSumSubmit()
+{ 
+    $.ajax
+      ({
+          method: 'POST',
+          url: '/calculations',
+          data: 
+          {
+            input1 : $("#input1").val(),
+            input2 : $("#input2").val(),
+            operator : operator
+          }
+      }).then(function(response)
+      {
+          console.log('response was', response);
+      })
+      //   }).catch(function(error){
+    //       //notifying the user of an error in post request
+    //       alert(error);
+}
+          
+
+// function determineOperator()
+// {
+//     if ($("#addBtn").click())
+//     {
+//         operator = '+';
+//         console.log( 'operator = +');
+//     } 
+//     if ($("#subtractBtn").click())
+//     {
+//         operator = '-';
+//         console.log( 'operator = -');
+//     }
+//     if ($("#multBtn").click())
+//     {
+//         operator = '*';
+//         console.log( 'operator = -');
+//     }
+//     if ($("#divBtn").click())
+//     {
+//         operator = '/';
+//         console.log( 'operator = -');
+//     }
 
 // takes in button values and assigns operator
 // function determineOperator()
@@ -38,65 +117,6 @@ console.log( $(".operator").attr());
 // {
 //     operator = '*'
 // }
-
-
-
-// function determineOperator()
-// {
-//     $(".operator").empty(); 
-//     if ($(".operator").attr() == '+'){
-//         operator = '+';
-//         console.log( 'operator = +');
-//     }
-
-
-// }
-
-// function assignAddition();
-// {
-//     operator = '+';
-// }
-
-// function assignSubtraction();
-// {
-//     operator = '-'
-// }
-
-// function assignDivision();
-// {
-//     operator = '/'
-// }
-
-// function assignMultiplication();
-// {
-//     operator = '*'
-// }
-
-
-
-
-
-// function submitEquation()
-// { 
-//     console.log('Input 1:', input1, 'Input 2:', input2, 'Operator:' operator);
-//     let input1 = $('#input1').attr();
-//     )
-  
-//       $.ajax
-//       ({
-//           method: 'POST',
-//           url: '/calculations',
-//           data: 
-//           {
-//             input1 : ,
-//             input2 : 
-//             operator : ,
-//           }
-//       }).then(function(response){
-//           console.log('response was', response);
-          
-          
-
 
 
 
