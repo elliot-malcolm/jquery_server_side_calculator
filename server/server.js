@@ -35,21 +35,25 @@ app.get('/calculations', (req, res) =>
 function findSum( submission )
 {
     console.log( 'in findsum ');
-    if ( submission.operator === '+' )
+    if ( submission.input1 == '' || submission.input1 == '' )
     {
-        return Number(submission.input1) + Number(submission.input1);
+        return false;
+    }
+    else if ( submission.operator === '+' )
+    {
+        return Number(submission.input1) + Number(submission.input2);
     }
     else if ( submission.operator === '-' )
     {
-        return Number(submission.input1) - Number(submission.input1);
+        return Number(submission.input1) - Number(submission.input2);
     }
     else if ( submission.operator === '*' )
     {
-        return Number(submission.input1) * Number(submission.input1);
+        return Number(submission.input1) * Number(submission.input2);
     }
     else if ( submission.operator === '/' )
     {
-        return Number(submission.input1) / Number(submission.input1);
+        return Number(submission.input1) / Number(submission.input2);
     }
     console.log( mathSubmissions );
 }

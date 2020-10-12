@@ -14,6 +14,6 @@ server
 
 //
 [x] "GET" req for calculation 
-[] post historical record (array)
-[] load all calculations onLoad 
-[] update list on new calculation 
+[x] post historical record (array)
+[x] load all calculations onLoad 
+[x] update list on new calculation 
