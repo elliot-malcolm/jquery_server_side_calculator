@@ -59,8 +59,8 @@ function sumSubmit()
     console.log( 'hello from SumSubmit! ');
     let submission = 
     {
-        input1 : Number($("#input1").val()),
-        input2 : Number($("#input2").val()),
+        input1 : $("#input1").val(),
+        input2 : $("#input2").val(),
         operator : operator
     }
 
@@ -72,45 +72,52 @@ function sumSubmit()
         }).then(function(response)
         {
         console.log('response was', response);
-        $('#sumOut').append(response);
+        let sumOut = response.submissionSum;
+        getMathSubmissions();
+        console.log(sumOut);
+        $('#sumOut').empty();
+        $('#sumOut').append(
+            `<h3>
+            Sum: ${sumOut}
+            </h3>`
+            );
         }).catch(function(error)
         {
             alert(error);
-        })
+        });
 }  
 
-// function getSubmissionAnswer() 
-// {
-//     $.ajax
-//         ({
-//             type: 'GET',
-//             url: '/calculations',
-//         }).then(function (response) 
-//         {
-//         console.log('sum is',response);
-//         appendHistory(response);
-//         }).catch(function(error)
-//         {
-//                 alert(error);
-//         })
-// };
+function getMathSubmissions() 
+{
+    $.ajax
+        ({
+            type: 'GET',
+            url: '/calculations'
+        }).then(function (response) 
+        {
+        console.log('sum is',response);
+        appendHistory(response);
+        }).catch(function(error)
+        {
+                alert(error);
+        })
+};
 
     
-// function appendHistory( mathyObjArray )
-// {
-//     console.log( 'appending obj to dom' );
-//     $('#historyTable').empty();
-//     for (let i = 0; i < mathyObjArray.length; i++)
-//     {
-//         $('#historyTable').append(`
-//         <tr>
-//             round${[i + 1]}: 
-//             ${mathyObjArray[i].input1} 
-//             ${mathyObjArray[i].operator} 
-//             ${mathyObjArray[i].input1}
-//         </tr>
-//         `);
-//     }
+function appendHistory( mathyObjArray )
+{
+    console.log( 'appending obj to dom' );
+    $('#historyTable').empty();
+    for (let i = 0; i < mathyObjArray.length; i++)
+    {
+    $('#historyTable').append(`
+        <tr> 
+           <td> ${mathyObjArray[i].input1} </td>
+           <td> ${mathyObjArray[i].operator} </td>
+           <td> ${mathyObjArray[i].input2} </td>
+        </tr>
+        `);
+    }
 
-// };
+};
 

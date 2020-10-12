@@ -1,54 +1,60 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = 5000;
 
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('server/public'));
 
-mathSubmissions = []
+mathSubmissions = [];
 
 mathyObj = null;
 
 app.post('/calculations', (req, res) => 
 {
     console.log('hello from post', req.body);
-    mathyObj = findSum(req.body)
-    mathSubmissions.push(mathyObj);
-    res.sendStatus(200);
-    res.send(mathyObj);
+    submissionSum = findSum(req.body);
+    mathSubmissions.push( 
+    { 
+        input1 : req.body.input1,
+        input2 : req.body.input2,
+        operator : req.body.operator,
+        sum : submissionSum
+    }
+    );
+    res.send({submissionSum});
 });
 
-// app.get('/calculations', (req, res) => 
-//     {
-//     console.log('sending', mathyObj );
-//     res.send(mathSubmissions);
-//     });
+app.get('/calculations', (req, res) => 
+    {
+    console.log('sending', mathyObj );
+    res.send(mathSubmissions);
+    });
 
 
 function findSum( submission )
 {
     console.log( 'in findsum ');
-    if ( submission.operator = '+' )
+    if ( submission.operator === '+' )
     {
         return Number(submission.input1) + Number(submission.input1);
     }
-    else if ( submission.operator = '-' )
+    else if ( submission.operator === '-' )
     {
-        return submission.input1 - submission.input1;
+        return Number(submission.input1) - Number(submission.input1);
     }
-    else if ( submission.operator = '*' )
+    else if ( submission.operator === '*' )
     {
-        return submission.input1 * submission.input1;
+        return Number(submission.input1) * Number(submission.input1);
     }
-    else if ( submission.operator = '/' )
+    else if ( submission.operator === '/' )
     {
-        return submission.input1 / submission.input1;
+        return Number(submission.input1) / Number(submission.input1);
     }
     console.log( mathSubmissions );
 }
 
 
 app.listen(PORT, () => {
-    console.log ('Server is running on port', PORT)
-  })
+    console.log ('Server is running on port', PORT);
+  });
